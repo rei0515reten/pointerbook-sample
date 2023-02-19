@@ -4,7 +4,7 @@
 typedef struct student student;
 struct student {
 	char *name;
-	int id;
+	size_t id;
 };
 
 int main() {

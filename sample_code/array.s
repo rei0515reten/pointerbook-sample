@@ -26,11 +26,11 @@ main:
 	sd	ra,72(sp)
 	sd	s0,64(sp)
 	addi	s0,sp,80
-	la	a5,__stack_chk_guard
-	ld	a5,0(a5)
-	sd	a5,-24(s0)
+	la	a5,__stack_chk_guard		//__stack_chk_guardという領域からランダム値をとる
+	ld	a5,0(a5)			//スタックプロテクタの領域に値をセット
+	sd	a5,-24(s0)			//スタックプロテクタの値を記憶
 	lla	a5,.LC0
-	ld	a4,0(a5)
+	ld	a4,0(a5)			//2要素分をロードしてる
 	sd	a4,-72(s0)
 	ld	a4,8(a5)
 	sd	a4,-64(s0)
@@ -58,7 +58,7 @@ main:
 	la	a5,__stack_chk_guard
 	ld	a4,-24(s0)
 	ld	a5,0(a5)
-	beq	a4,a5,.L3
+	beq	a4,a5,.L3			//スタックプロテクタの値を比較（異なればスタックオーバーフローなどが起こっている）
 	call	__stack_chk_fail@plt
 .L3:
 	mv	a0,a3

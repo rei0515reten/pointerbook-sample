@@ -23,7 +23,7 @@ main:
 	sd	a4,0(a5)
 	ld	a5,-24(s0)
 	li	a4,10
-	sw	a4,8(a5)
+	sd	a4,8(a5)
 	li	a5,0
 	mv	a0,a5
 	ld	ra,24(sp)

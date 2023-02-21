@@ -5,7 +5,7 @@ typedef struct student student;
 struct student {
 	char *name;
 	size_t id;
-};
+} Std;
 
 int main() {
 	student *std = (student *)malloc(sizeof(student));
@@ -13,6 +13,8 @@ int main() {
 	std -> name = "reten";
 
 	std -> id = 10;
+
+	Std.id = 11;
 
 	return 0;
 }

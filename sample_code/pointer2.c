@@ -14,7 +14,7 @@ int main() {
 
 	std -> id = 10;
 
-	Std.id = 20;
+	Std.id = 30;
 
 	return 0;
 }

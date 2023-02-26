@@ -3,6 +3,7 @@ FROM ubuntu:bionic
 WORKDIR /app
 
 ENV PATH=$PATH:/opt/riscv/bin
+ENV PATH=$PATH:/opt/riscv/spike/bin 
 ENV TOOL_PATH=/app/riscv-gnu-toolchain/build
 ENV SPIKE_PATH=/app/riscv-isa-sim/build
 ENV PK_PATH=/app/riscv-pk/build
@@ -62,7 +63,7 @@ WORKDIR $PK_PATH
 
 RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf && \
 	make && \
-	make install
-		
+	make install && \
+	alias pk="ln -s /opt/riscv/pk/riscv32-unknown-elf/bin/pk ./pk"		
 	
 

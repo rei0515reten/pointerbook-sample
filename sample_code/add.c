@@ -6,7 +6,5 @@ int main(){
 
 	int b = a + 3;
 
-	printf("%d/n",b);
-
 	return 0;
 }

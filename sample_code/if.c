@@ -5,9 +5,7 @@ int main(){
 	int a = 5;
 
 	if (a == 5) {
-
-		printf("five\n");
-
+		a = 1;
 	}
 
 	return 0;

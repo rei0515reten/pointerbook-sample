@@ -1,36 +1,31 @@
 	.file	"for.c"
 	.option pic
 	.text
-	.section	.rodata
-	.align	3
-.LC0:
-	.string	"hello"
-	.text
 	.align	1
 	.globl	main
 	.type	main, @function
 main:
 	addi	sp,sp,-32
-	sd	ra,24(sp)
-	sd	s0,16(sp)
+	sd	s0,24(sp)
 	addi	s0,sp,32
-	sw	zero,-20(s0)
+	sw	zero,-24(s0)
 	j	.L2
 .L3:
-	lla	a0,.LC0
-	call	printf@plt
-	lw	a5,-20(s0)
-	addiw	a5,a5,1
+	lw	a4,-20(s0)
+	lw	a5,-24(s0)
+	addw	a5,a4,a5
 	sw	a5,-20(s0)
+	lw	a5,-24(s0)
+	addiw	a5,a5,1
+	sw	a5,-24(s0)
 .L2:
-	lw	a5,-20(s0)
+	lw	a5,-24(s0)
 	sext.w	a4,a5
 	li	a5,9
 	ble	a4,a5,.L3
 	li	a5,0
 	mv	a0,a5
-	ld	ra,24(sp)
-	ld	s0,16(sp)
+	ld	s0,24(sp)
 	addi	sp,sp,32
 	jr	ra
 	.size	main, .-main

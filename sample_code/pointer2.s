@@ -1,6 +1,8 @@
 	.file	"pointer2.c"
 	.option pic
 	.text
+	.comm	Std,16,8
+	.comm	Std1,16,8
 	.section	.rodata
 	.align	3
 .LC0:
@@ -20,10 +22,16 @@ main:
 	sd	a5,-24(s0)
 	ld	a5,-24(s0)
 	lla	a4,.LC0
-	sd	a4,0(a5)
+	sd	a4,8(a5)
 	ld	a5,-24(s0)
 	li	a4,10
-	sd	a4,8(a5)
+	sb	a4,0(a5)
+	ld	a5,-24(s0)
+	li	a4,100
+	sh	a4,2(a5)
+	la	a5,Std
+	li	a4,30
+	sb	a4,0(a5)
 	li	a5,0
 	mv	a0,a5
 	ld	ra,24(sp)

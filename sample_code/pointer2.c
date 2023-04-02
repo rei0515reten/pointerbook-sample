@@ -3,9 +3,10 @@
 
 typedef struct student student;
 struct student {
+	char id;
+	short n;
 	char *name;
-	size_t id;
-} Std;
+} Std,Std1;
 
 int main() {
 	student *std = (student *)malloc(sizeof(student));
@@ -13,6 +14,8 @@ int main() {
 	std -> name = "reten";
 
 	std -> id = 10;
+
+	std -> n = 100;
 
 	Std.id = 30;
 

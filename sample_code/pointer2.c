@@ -4,20 +4,20 @@
 typedef struct student student;
 struct student {
 	char id;
-	short n;
+	short age;
 	char *name;
-} Std,Std1;
+} Stud,Stud1;
 
 int main() {
-	student *std = (student *)malloc(sizeof(student));
+	student *stud = (student *)malloc(sizeof(student));
 
-	std -> name = "reten";
+	stud -> name = "reten";
 
-	std -> id = 10;
+	stud -> id = 10;
 
-	std -> n = 100;
+	stud -> age = 21;
 
-	Std.id = 30;
+	Stud.id = 11;
 
 	return 0;
 }

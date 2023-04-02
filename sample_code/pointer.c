@@ -12,6 +12,5 @@ int main(){
 	int **ii = &i;
 	int ***iii = &ii;
 
-
 	return 0;
 }

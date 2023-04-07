@@ -6,18 +6,18 @@ struct student {
 	char id;
 	short age;
 	char *name;
-} Stud,Stud1;
+} Student1,Student2;
 
 int main() {
-	student *stud = (student *)malloc(sizeof(student));
+	student *s = (student *)malloc(sizeof(student));
 
-	stud -> name = "reten";
+	s -> name = "reten";
 
-	stud -> id = 10;
+	s -> id = 10;
 
-	stud -> age = 21;
+	s -> age = 21;
 
-	Stud.id = 11;
+	Student1.id = 11;
 
 	return 0;
 }

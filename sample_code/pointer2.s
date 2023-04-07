@@ -1,8 +1,8 @@
 	.file	"pointer2.c"
 	.option pic
 	.text
-	.comm	Stud,16,8
-	.comm	Stud1,16,8
+	.comm	Student1,16,8
+	.comm	Student2,16,8
 	.section	.rodata
 	.align	3
 .LC0:
@@ -29,7 +29,7 @@ main:
 	ld	a5,-24(s0)
 	li	a4,21
 	sh	a4,2(a5)
-	la	a5,Stud
+	la	a5,Student1
 	li	a4,11
 	sb	a4,0(a5)
 	li	a5,0

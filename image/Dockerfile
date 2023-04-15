@@ -47,7 +47,8 @@ RUN	../configure --prefix=/opt/riscv && \
 
 WORKDIR /app
 
-RUN git clone https://github.com/riscv/riscv-isa-sim
+RUN 	rm -r riscv-gnu-toolchain && \
+	git clone https://github.com/riscv/riscv-isa-sim
 
 WORKDIR $SPIKE_PATH
 
@@ -57,13 +58,15 @@ RUN	../configure --prefix=/opt/riscv/spike && \
 
 WORKDIR /app
 
-RUN git clone https://github.com/riscv/riscv-pk
+RUN 	rm -r riscv-isa-sim && \
+	git clone https://github.com/riscv/riscv-pk
 
 WORKDIR $PK_PATH
 
 RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf && \
 	make && \
 	make install && \
-	alias pk="ln -s /opt/riscv/pk/riscv32-unknown-elf/bin/pk ./pk"		
+	alias pk="ln -s /opt/riscv/pk/riscv64-unknown-elf/bin/pk ./pk" && \
+	rm -r riscv-pk		
 	
 

@@ -65,8 +65,11 @@ WORKDIR $PK_PATH
 
 RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf && \
 	make && \
-	make install && \
-	alias pk="ln -s /opt/riscv/pk/riscv64-unknown-elf/bin/pk ./pk" && \
+	make install
+
+WORKDIR /app
+
+RUN	alias pk="ln -s /opt/riscv/pk/riscv64-unknown-elf/bin/pk ./pk" && \
 	rm -r riscv-pk		
 	
 

@@ -1,9 +1,7 @@
 FROM ubuntu:bionic
 
 WORKDIR /app
-
-ENV PATH=$PATH:/opt/riscv/bin
-ENV PATH=$PATH:/opt/riscv/spike/bin 
+ 
 ENV TOOL_PATH=/app/riscv-gnu-toolchain/build
 ENV SPIKE_PATH=/app/riscv-isa-sim/build
 ENV PK_PATH=/app/riscv-pk/build
@@ -69,7 +67,5 @@ RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf && \
 
 WORKDIR /app
 
-RUN	alias pk="ln -s /opt/riscv/pk/riscv64-unknown-elf/bin/pk ./pk" && \
-	rm -r riscv-pk		
-	
-
+RUN	rm -r riscv-pk && \
+	cp env.sh /app/.env.sh && echo ". /app/.env.sh" >> .bashrc

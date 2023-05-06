@@ -2,6 +2,8 @@ FROM ubuntu:bionic
 
 WORKDIR /app
  
+ENV PATH=$PATH:/opt/riscv/bin
+ENV PATH=$PATH:/opt/riscv/spike/bin 
 ENV TOOL_PATH=/app/riscv-gnu-toolchain/build
 ENV SPIKE_PATH=/app/riscv-isa-sim/build
 ENV PK_PATH=/app/riscv-pk/build
@@ -29,18 +31,16 @@ RUN apt update && \
 	libexpat-dev \
 	git \
 	device-tree-compiler \
-	vim 
+	vim \
+	gcc-riscv64-linux-gnu 
 	
-RUN git clone https://github.com/riscv/riscv-gnu-toolchain
+RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
 
 WORKDIR /app/riscv-gnu-toolchain
 	
-RUN git submodule update --init --recursive
-
 WORKDIR $TOOL_PATH
 
 RUN	../configure --prefix=/opt/riscv && \
-	make -j$(nproc) && \
 	make linux -j$(nproc)
 
 WORKDIR /app
@@ -61,7 +61,7 @@ RUN 	rm -r riscv-isa-sim && \
 
 WORKDIR $PK_PATH
 
-RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf && \
+RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu && \
 	make && \
 	make install
 

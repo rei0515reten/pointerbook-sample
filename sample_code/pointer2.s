@@ -8,7 +8,7 @@
 .LC0:
 	.string	"reten"
 	.text
-	.align	1
+	.align	2
 	.globl	main
 	.type	main, @function
 main:

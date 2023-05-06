@@ -1,7 +1,7 @@
 	.file	"func.c"
 	.option pic
 	.text
-	.align	1
+	.align	2
 	.globl	main
 	.type	main, @function
 main:
@@ -28,7 +28,7 @@ main:
 	addi	sp,sp,32
 	jr	ra
 	.size	main, .-main
-	.align	1
+	.align	2
 	.globl	func1
 	.type	func1, @function
 func1:
@@ -42,13 +42,13 @@ func1:
 	addi	sp,sp,32
 	jr	ra
 	.size	func1, .-func1
-	.align	1
+	.align	2
 	.globl	func2
 	.type	func2, @function
 func2:
-	addi	sp,sp,-32	//プロローグ：領域確保でspを動かす
-	sd	s0,24(sp)	//プロローグ：s0(フレームレジスタ、ベースレジスタ)をストア。関数呼び出し時点を記憶しておく（呼び出し元の開始地点が入っているから）
-	addi	s0,sp,32	//プロローグ：関数フレーム内をオフセットでアクセスするとき用にフレームレジスタを関数フレームの最初を指すようにする
+	addi	sp,sp,-32
+	sd	s0,24(sp)
+	addi	s0,sp,32
 	mv	a5,a0
 	mv	a4,a1
 	sw	a5,-20(s0)
@@ -59,9 +59,9 @@ func2:
 	addw	a5,a4,a5
 	sext.w	a5,a5
 	mv	a0,a5
-	ld	s0,24(sp)	//エピローグ：記憶しておいた呼び出し元のフレームポインタを戻す
-	addi	sp,sp,32	//エピローグ：関数フレーム解放
-	jr	ra		//エピローグ：戻りアドレスにジャンプ
+	ld	s0,24(sp)
+	addi	sp,sp,32
+	jr	ra
 	.size	func2, .-func2
 	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
 	.section	.note.GNU-stack,"",@progbits

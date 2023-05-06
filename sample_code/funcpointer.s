@@ -1,7 +1,7 @@
 	.file	"funcpointer.c"
 	.option pic
 	.text
-	.align	1
+	.align	2
 	.globl	func
 	.type	func, @function
 func:
@@ -18,7 +18,7 @@ func:
 	addi	sp,sp,32
 	jr	ra
 	.size	func, .-func
-	.align	1
+	.align	2
 	.globl	main
 	.type	main, @function
 main:

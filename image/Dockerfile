@@ -61,7 +61,7 @@ RUN 	rm -r riscv-isa-sim && \
 
 WORKDIR $PK_PATH
 
-RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu && \
+RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu --with-abi=lp64 && \
 	make && \
 	make install
 

@@ -40,7 +40,7 @@ WORKDIR /app/riscv-gnu-toolchain
 	
 WORKDIR $TOOL_PATH
 
-RUN	../configure --prefix=/opt/riscv && \
+RUN	../configure --prefix=/opt/riscv --with-abi=lp64d --with-arch=rv64g && \
 	make linux -j$(nproc)
 
 WORKDIR /app
@@ -50,7 +50,7 @@ RUN 	rm -r riscv-gnu-toolchain && \
 
 WORKDIR $SPIKE_PATH
 
-RUN	../configure --prefix=/opt/riscv/spike && \
+RUN	../configure --prefix=/opt/riscv/spike --with-abi=lp64d --with-arch=rv64g && \
 	make && \
 	make install
 
@@ -61,11 +61,13 @@ RUN 	rm -r riscv-isa-sim && \
 
 WORKDIR $PK_PATH
 
-RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu --with-abi=lp64 && \
+RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu --with-abi=lp64d --with-arch=rv64g && \
 	make && \
 	make install
 
 WORKDIR /app
 
+COPY script /app/script
+
 RUN	rm -r riscv-pk && \
-	cp env.sh /app/.env.sh && echo ". /app/.env.sh" >> .bashrc
+	cp script/env.sh /app/.env.sh && echo ". /app/.env.sh" >> .bashrc

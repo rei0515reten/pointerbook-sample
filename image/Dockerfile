@@ -3,7 +3,9 @@ FROM ubuntu:bionic
 WORKDIR /app
  
 ENV PATH=$PATH:/opt/riscv/bin
-ENV PATH=$PATH:/opt/riscv/spike/bin 
+ENV PATH=$PATH:/opt/riscv/spike/bin
+ENV HOME=/root
+ENV USER=root 
 ENV TOOL_PATH=/app/riscv-gnu-toolchain/build
 ENV SPIKE_PATH=/app/riscv-isa-sim/build
 ENV PK_PATH=/app/riscv-pk/build
@@ -31,8 +33,7 @@ RUN apt update && \
 	libexpat-dev \
 	git \
 	device-tree-compiler \
-	vim \
-	gcc-riscv64-linux-gnu 
+	vim 
 	
 RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
 
@@ -40,8 +41,8 @@ WORKDIR /app/riscv-gnu-toolchain
 	
 WORKDIR $TOOL_PATH
 
-RUN	../configure --prefix=/opt/riscv --with-abi=lp64d --with-arch=rv64g && \
-	make linux -j$(nproc)
+RUN	../configure --prefix=/opt/riscv && \
+	make -j$(nproc)
 
 WORKDIR /app
 
@@ -50,7 +51,7 @@ RUN 	rm -r riscv-gnu-toolchain && \
 
 WORKDIR $SPIKE_PATH
 
-RUN	../configure --prefix=/opt/riscv/spike --with-abi=lp64d --with-arch=rv64g && \
+RUN	../configure --prefix=/opt/riscv/spike && \
 	make && \
 	make install
 
@@ -61,7 +62,7 @@ RUN 	rm -r riscv-isa-sim && \
 
 WORKDIR $PK_PATH
 
-RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-linux-gnu --with-abi=lp64d --with-arch=rv64g && \
+RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf --with-abi=lp64d --with-arch=rv64g && \
 	make && \
 	make install
 
@@ -70,4 +71,4 @@ WORKDIR /app
 COPY script /app/script
 
 RUN	rm -r riscv-pk && \
-	cp script/env.sh /app/.env.sh && echo ". /app/.env.sh" >> .bashrc
+	cp script/env.sh /app/.env.sh && echo ". /app/.env.sh" >> ${HOME}/.bashrc

@@ -41,7 +41,7 @@ WORKDIR /app/riscv-gnu-toolchain
 	
 WORKDIR $TOOL_PATH
 
-RUN	../configure --prefix=/opt/riscv && \
+RUN	../configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d && \
 	make -j$(nproc)
 
 WORKDIR /app
@@ -51,7 +51,7 @@ RUN 	rm -r riscv-gnu-toolchain && \
 
 WORKDIR $SPIKE_PATH
 
-RUN	../configure --prefix=/opt/riscv/spike && \
+RUN	../configure --prefix=/opt/riscv/spike --with-isa=rv64g && \
 	make && \
 	make install
 
@@ -62,7 +62,7 @@ RUN 	rm -r riscv-isa-sim && \
 
 WORKDIR $PK_PATH
 
-RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf --with-abi=lp64d --with-arch=rv64g && \
+RUN	../configure --prefix=/opt/riscv/pk --host=riscv64-unknown-elf --with-arch=rv64g --with-abi=lp64d && \
 	make && \
 	make install
 

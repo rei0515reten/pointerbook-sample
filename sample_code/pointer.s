@@ -1,7 +1,7 @@
 	.file	"pointer.c"
 	.option pic
 	.text
-	.align	2
+	.align	1
 	.globl	main
 	.type	main, @function
 main:

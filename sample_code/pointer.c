@@ -2,8 +2,8 @@
 
 int main(){
 
-	char str = 'a';
-	char *p = &str;
+	char c = 'a';
+	char *p = &c;
 	char **pp = &p;
 	char ***ppp = &pp;
 

@@ -1,10 +1,10 @@
 # pointerbook-sample
-このリポジトリは技術書典14に販売予定である本のDockerfileとサンプルコードです。（タイトル未定）
+このリポジトリは技術書典14の新刊「C言語のポインタをアセンブリで理解しよう！～RISC-V編～」の実行環境とサンプルコードです。
 
 ## 環境構築
 ### dockerhubからimageをpull
 ```
-docker pull reten/riscv_exe
+docker pull reten/riscv_exe:latest
 ```
 
 ### Dockerfileをbuildしてimageを作成

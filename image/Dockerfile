@@ -33,7 +33,8 @@ RUN apt update && \
 	libexpat-dev \
 	git \
 	device-tree-compiler \
-	vim 
+	vim \
+	gcc-riscv64-linux-gnu  
 	
 RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
 
